@@ -13,6 +13,7 @@ pipeline {
 
     stage('Validate') {
         steps {
+            sh 'echo "Branch is: $BRANCH_NAME"'
             echo 'Validating init SQL script...'
             sh 'test -f init-scripts/init.sql || (echo "init.sql not found!" && exit 1)'
             }
