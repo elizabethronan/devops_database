@@ -31,6 +31,12 @@ pipeline {
     }
 
     stage('Security Scan') {
+        when {
+            anyOf {
+                branch 'develop'
+                branch 'main'
+            }
+        }
       steps {
         securityScan("${IMAGE_NAME}:${IMAGE_TAG}", 'image')
       }
