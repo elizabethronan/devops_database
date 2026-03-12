@@ -54,29 +54,29 @@ pipeline {
       }
     }
 
-    // stage('Deploy to Staging') {
-    //     when {
-    //         branch 'release/*'
-    //     }
-    //     steps {
-    //         deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'staging')
-    //     }
+    stage('Deploy to Staging') {
+        when {
+            branch 'release/*'
+        }
+        steps {
+            deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'staging')
+        }
     }
-    // stage('Deploy to Dev') {
-    //   when { branch 'develop' }
-    //   steps {
-    //     deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'dev')
-    //   }
-    // }
+    stage('Deploy to Dev') {
+      when { branch 'develop' }
+      steps {
+        deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'dev')
+      }
+    }
 
-    // stage('Deploy to Production') {
-    //     when { branch 'main' }
-    //     steps {
-    //         input message: 'Deploy to production?', ok: 'Approve'
-    //         deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'prod')
-    //     }
-    // }
-  //}
+    stage('Deploy to Production') {
+        when { branch 'main' }
+        steps {
+            input message: 'Deploy to production?', ok: 'Approve'
+            deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'prod')
+        }
+    }
+  }
 
   post {
     success {
