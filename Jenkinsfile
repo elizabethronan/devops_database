@@ -9,6 +9,18 @@ pipeline {
   }
 
   stages {
+    
+    stage('PR Validation') {
+        when {
+            changeRequest()
+        }
+        steps {
+            echo 'Running PR validation for database service'
+            sh 'test -f init-scripts/init.sql || (echo "init.sql not found!" && exit 1)'
+            sh 'test -f Dockerfile || (echo "Dockerfile not found!" && exit 1)'
+            echo 'PR validation passed'
+        }
+    }
 
     stage('Validate') {
         steps {
@@ -42,7 +54,14 @@ pipeline {
       }
     }
 
-
+    // stage('Deploy to Staging') {
+    //     when {
+    //         branch 'release/*'
+    //     }
+    //     steps {
+    //         deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'staging')
+    //     }
+    }
     // stage('Deploy to Dev') {
     //   when { branch 'develop' }
     //   steps {
