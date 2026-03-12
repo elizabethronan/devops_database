@@ -6,7 +6,6 @@ pipeline {
   environment {
     IMAGE_NAME    = "eronan22/database"
     IMAGE_TAG     = "git-${GIT_COMMIT[0..7]}"
-    REGISTRY_CRED = credentials('dockerhub-credentials')
   }
 
   stages {
@@ -27,7 +26,7 @@ pipeline {
         }
       }
       steps {
-        buildAndPush(IMAGE_NAME, IMAGE_TAG, REGISTRY_CRED)
+        buildAndPush(IMAGE_NAME, IMAGE_TAG, 'dockerhub-credentials')
       }
     }
 
