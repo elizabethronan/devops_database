@@ -9,7 +9,7 @@ pipeline {
   }
 
   stages {
-    
+
     stage('PR Validation') {
         when {
             changeRequest()
@@ -76,7 +76,7 @@ pipeline {
     //         deployToK8s('database', IMAGE_NAME, IMAGE_TAG, 'prod')
     //     }
     // }
-  }
+  //}
 
   post {
     success {
